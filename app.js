@@ -67,12 +67,6 @@ async function fetchProjectCounts() {
             projectCounts.inProgress = inProgressResponse.data.total || 0;
             projectCounts.done = doneResponse.data.total || 0;
             projectCounts.open = openResponse.data.total || 0;
-
-            console.log(`PROJECTS IN-PROGRESS: ${projectCounts.inProgress}`);
-            console.log(`PROJECTS DONE: ${projectCounts.done}`);
-            console.log(`PROJECTS OPEN: ${projectCounts.open}`);
-
-            delay = 5000;
         } else {
             console.log('Failed to retrieve data.');
         }
