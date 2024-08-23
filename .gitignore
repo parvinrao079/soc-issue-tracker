@@ -1,0 +1,26 @@
+# Node.js dependencies
+node_modules/
+
+# Output directories
+dist/
+build/
+coverage/
+.parcel-cache/
+
+# Environment variables
+.env
+.env.*
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Editor-specific files
+*.swp
+*.tmp
+.vscode/ (if you're using Visual Studio Code and don't want to commit your editor settings)

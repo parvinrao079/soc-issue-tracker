@@ -1,0 +1,16 @@
+{
+  "name": "my-parcel-app",
+  "source": "index.html",
+  "scripts": {
+    "dev": "parcel",
+    "build": "parcel build"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "parcel": "^2.12.0"
+  }
+}
