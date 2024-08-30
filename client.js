@@ -1,6 +1,6 @@
 async function fetchAndDisplayCounts() {
     try {
-        const response = await fetch('/project-status');
+        const response = await fetch('http://localhost:3000/project-status');
         const counts = await response.json();
 
         document.getElementById('app').innerHTML = `

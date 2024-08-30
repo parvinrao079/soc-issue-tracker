@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const axios = require('axios');
+const cors = require('cors');  // Import the cors middleware
 require('dotenv').config();
 
 const app = express();
@@ -32,6 +33,9 @@ let projectCounts = {
 
 let delay = 5000;
 const maxDelay = 60000;
+
+// Use the CORS middleware to handle cross-origin requests
+app.use(cors());
 
 async function fetchProjectCounts() {
     try {
@@ -67,6 +71,9 @@ async function fetchProjectCounts() {
             projectCounts.inProgress = inProgressResponse.data.total || 0;
             projectCounts.done = doneResponse.data.total || 0;
             projectCounts.open = openResponse.data.total || 0;
+
+            // Reset delay to initial value on successful request
+            delay = 5000;
         } else {
             console.log('Failed to retrieve data.');
         }
@@ -84,7 +91,7 @@ function handleRateLimitError(error) {
         console.error('Headers:', error.response.headers);
         if (error.response.status === 429) {
             console.log('Rate limit exceeded. Increasing delay.');
-            delay = Math.min(delay * 2, maxDelay);
+            delay = Math.min(delay * 2, maxDelay); // Exponential backoff
         }
     } else if (error.request) {
         console.error('No response received:', error.request);
