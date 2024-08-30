@@ -16,15 +16,15 @@ async function fetchAndDisplayCounts() {
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                 <div class="bg-red-600 text-white rounded-lg p-8 text-center">
                     <p class="text-6xl font-bold">${counts.open}</p>
-                    <p class="text-xl mt-4">Open</p>
+                    <p class="text-3xl mt-4">Open</p>
                 </div>
                 <div class="bg-yellow-500 text-white rounded-lg p-8 text-center">
                     <p class="text-6xl font-bold">${counts.inProgress}</p>
-                    <p class="text-xl mt-4">In Progress</p>
+                    <p class="text-3xl mt-4">In Progress</p>
                 </div>
                 <div class="bg-green-600 text-white rounded-lg p-8 text-center">
                     <p class="text-6xl font-bold">${counts.done}</p>
-                    <p class="text-xl mt-4">Done</p>
+                    <p class="text-3xl mt-4">Done</p>
                 </div>
             </div>
 
@@ -36,16 +36,16 @@ async function fetchAndDisplayCounts() {
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <!-- Add content for the Certificates section here -->
                 <div class="bg-red-600 text-white rounded-lg p-8 text-center">
-                    <p class="text-6xl font-bold">Placeholder</p>
-                    <p class="text-xl mt-4">Overdue</p>
+                    <p class="text-6xl font-bold">${counts.overdueCert}</p>
+                    <p class="text-3xl mt-4">Overdue</p>
                 </div>
                 <div class="bg-yellow-500 text-white rounded-lg p-8 text-center">
-                    <p class="text-6xl font-bold">Placeholder</p>
-                    <p class="text-xl mt-4">Due Within <= 4 Weeks </p>
+                    <p class="text-6xl font-bold">${counts.DueLess4_cert}</p>
+                    <p class="text-3xl mt-4">Due Within <= 4 Weeks </p>
                 </div>
                 <div class="bg-green-600 text-white rounded-lg p-8 text-center">
-                    <p class="text-6xl font-bold">Placeholder</p>
-                    <p class="text-xl mt-4">Due Within > 4 Weeks</p>
+                    <p class="text-6xl font-bold">${counts.DueMore4_cert}</p>
+                    <p class="text-3xl mt-4">Due Within > 4 Weeks</p>
                 </div>
             </div>
         `;

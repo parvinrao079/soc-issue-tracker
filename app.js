@@ -24,11 +24,17 @@ const jiraUrl = "https://agilimo.atlassian.net/rest/api/3/search";
 const jqlInProgress = `filter=10034`;
 const jqlDone = `filter=10035`;
 const jqlOpen = `filter=10025`;
+const certificateOverdue = `filter=10056`;
+const certificateDueLess4 = `filter=10057`;
+const certificateDueMore4 = `filter=10058`;
 
 let projectCounts = {
     inProgress: 0,
     done: 0,
-    open: 0
+    open: 0,
+    overdueCert: 0,
+    DueLess4_cert: 0,
+    DueMore4_cert: 0
 };
 
 let delay = 60000;  // Start with a 1-minute delay
@@ -41,7 +47,14 @@ async function fetchProjectCounts() {
     try {
         console.log('Starting API requests...');
 
-        const [inProgressResponse, doneResponse, openResponse] = await Promise.all([
+        const [
+            inProgressResponse,
+            doneResponse,
+            openResponse,
+            overdueCertResponse,
+            dueLess4CertResponse,
+            dueMore4CertResponse
+        ] = await Promise.all([
             axios.get(jiraUrl, {
                 headers: {
                     ...headers,
@@ -62,15 +75,41 @@ async function fetchProjectCounts() {
                     "Authorization": `Basic ${Buffer.from(`${jiraUsername}:${jiraApiToken}`).toString('base64')}`
                 },
                 params: { jql: jqlOpen }
+            }),
+            axios.get(jiraUrl, {
+                headers: {
+                    ...headers,
+                    "Authorization": `Basic ${Buffer.from(`${jiraUsername}:${jiraApiToken}`).toString('base64')}`
+                },
+                params: { jql: certificateOverdue }
+            }),
+            axios.get(jiraUrl, {
+                headers: {
+                    ...headers,
+                    "Authorization": `Basic ${Buffer.from(`${jiraUsername}:${jiraApiToken}`).toString('base64')}`
+                },
+                params: { jql: certificateDueLess4 }
+            }),
+            axios.get(jiraUrl, {
+                headers: {
+                    ...headers,
+                    "Authorization": `Basic ${Buffer.from(`${jiraUsername}:${jiraApiToken}`).toString('base64')}`
+                },
+                params: { jql: certificateDueMore4 }
             })
         ]);
 
         console.log('API requests successful');
 
-        if (inProgressResponse.status === 200 && doneResponse.status === 200 && openResponse.status === 200) {
+        if (inProgressResponse.status === 200 && doneResponse.status === 200 && openResponse.status === 200 &&
+            overdueCertResponse.status === 200 && dueLess4CertResponse.status === 200 && dueMore4CertResponse.status === 200) {
+
             projectCounts.inProgress = inProgressResponse.data.total || 0;
             projectCounts.done = doneResponse.data.total || 0;
             projectCounts.open = openResponse.data.total || 0;
+            projectCounts.overdueCert = overdueCertResponse.data.total || 0;
+            projectCounts.DueLess4_cert = dueLess4CertResponse.data.total || 0;
+            projectCounts.DueMore4_cert = dueMore4CertResponse.data.total || 0;
 
             // Reset delay to initial value on successful request
             delay = 60000; // Reset to 1 minute
