@@ -31,8 +31,8 @@ let projectCounts = {
     open: 0
 };
 
-let delay = 5000;
-const maxDelay = 60000;
+let delay = 60000;  // Start with a 1-minute delay
+const maxDelay = 300000; // Max delay set to 5 minutes
 
 // Use the CORS middleware to handle cross-origin requests
 app.use(cors());
@@ -73,7 +73,7 @@ async function fetchProjectCounts() {
             projectCounts.open = openResponse.data.total || 0;
 
             // Reset delay to initial value on successful request
-            delay = 5000;
+            delay = 60000; // Reset to 1 minute
         } else {
             console.log('Failed to retrieve data.');
         }
@@ -91,7 +91,7 @@ function handleRateLimitError(error) {
         console.error('Headers:', error.response.headers);
         if (error.response.status === 429) {
             console.log('Rate limit exceeded. Increasing delay.');
-            delay = Math.min(delay * 2, maxDelay); // Exponential backoff
+            delay = Math.min(delay * 2, maxDelay); // Exponential backoff with max delay of 5 minutes
         }
     } else if (error.request) {
         console.error('No response received:', error.request);

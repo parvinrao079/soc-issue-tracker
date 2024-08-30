@@ -5,20 +5,47 @@ async function fetchAndDisplayCounts() {
 
         document.getElementById('app').innerHTML = `
             <div class="text-center mb-8">
-                <h1 class="text-4xl font-bold text-blue-500">SOC Issue Dashboard</h1>
+                <h1 class="text-4xl font-bold text-white">AGG SOC Dashboard</h1>
+            </div>
+
+            <hr class="border-t-2 border-gray-300 mb-8">
+
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-left text-white">SOC Tickets</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                <div class="bg-red-600 text-white rounded-lg p-8 text-center">
+                    <p class="text-6xl font-bold">${counts.open}</p>
+                    <p class="text-xl mt-4">Open</p>
+                </div>
+                <div class="bg-yellow-500 text-white rounded-lg p-8 text-center">
+                    <p class="text-6xl font-bold">${counts.inProgress}</p>
+                    <p class="text-xl mt-4">In Progress</p>
+                </div>
+                <div class="bg-green-600 text-white rounded-lg p-8 text-center">
+                    <p class="text-6xl font-bold">${counts.done}</p>
+                    <p class="text-xl mt-4">Done</p>
+                </div>
+            </div>
+
+            <hr class="border-t-2 border-gray-300 mb-8">
+
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-left text-white">Certificates</h2>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="bg-white shadow-lg rounded-lg p-6">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-4">In Progress</h2>
-                    <p class="text-3xl text-blue-600">${counts.inProgress}</p>
+                <!-- Add content for the Certificates section here -->
+                <div class="bg-red-600 text-white rounded-lg p-8 text-center">
+                    <p class="text-6xl font-bold">Placeholder</p>
+                    <p class="text-xl mt-4">Overdue</p>
                 </div>
-                <div class="bg-white shadow-lg rounded-lg p-6">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Done</h2>
-                    <p class="text-3xl text-green-600">${counts.done}</p>
+                <div class="bg-yellow-500 text-white rounded-lg p-8 text-center">
+                    <p class="text-6xl font-bold">Placeholder</p>
+                    <p class="text-xl mt-4">Due Within <= 4 Weeks </p>
                 </div>
-                <div class="bg-white shadow-lg rounded-lg p-6">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Open</h2>
-                    <p class="text-3xl text-red-600">${counts.open}</p>
+                <div class="bg-green-600 text-white rounded-lg p-8 text-center">
+                    <p class="text-6xl font-bold">Placeholder</p>
+                    <p class="text-xl mt-4">Due Within > 4 Weeks</p>
                 </div>
             </div>
         `;
@@ -31,4 +58,4 @@ async function fetchAndDisplayCounts() {
 fetchAndDisplayCounts();
 
 // Optionally refresh the data periodically
-setInterval(fetchAndDisplayCounts, 5000);
+setInterval(fetchAndDisplayCounts, 60000);  // Refresh data every 1 minute
