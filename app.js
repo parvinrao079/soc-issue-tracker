@@ -9,17 +9,16 @@ const port = process.env.PORT || 3000;
 
 const jiraUsername = process.env.JIRA_EMAIL;
 const jiraApiToken = process.env.JIRA_API_TOKEN;
+const jiraUrl = process.env.JIRA_URL; // Use the JIRA_URL environment variable
 
-if (!jiraUsername || !jiraApiToken) {
-    console.error("JIRA_EMAIL or JIRA_API_TOKEN environment variable is not set.");
+if (!jiraUsername || !jiraApiToken || !jiraUrl) {
+    console.error("JIRA_EMAIL, JIRA_API_TOKEN, or JIRA_URL environment variable is not set.");
     process.exit(1);  // Exit the process with an error
 }
 
 const headers = {
     "Accept": "application/json"
 };
-
-const jiraUrl = "https://agilimo.atlassian.net/rest/api/3/search";
 
 const jqlInProgress = `filter=10034`;
 const jqlDone = `filter=10035`;
