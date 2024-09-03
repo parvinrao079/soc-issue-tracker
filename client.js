@@ -1,6 +1,7 @@
 async function fetchAndDisplayCounts() {
     try {
-        const response = await fetch('http://localhost:3000/project-status');
+        // Use a relative path so that the correct backend URL is used, regardless of the environment
+        const response = await fetch('/project-status');
         const counts = await response.json();
 
         document.getElementById('app').innerHTML = `
@@ -54,7 +55,7 @@ async function fetchAndDisplayCounts() {
     }
 }
 
-// Call the function initially
+// Call the function initially to load data
 fetchAndDisplayCounts();
 
 // Optionally refresh the data periodically
